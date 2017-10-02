@@ -92,7 +92,9 @@ endif ()
 ## include the parts
 add_subdirectory ( include )
 add_subdirectory ( src )
-add_subdirectory ( test )
+if(BUILD_TESTING)
+    add_subdirectory ( test )
+endif()
 
 install (FILES LICENSE README.md DESTINATION .)
 

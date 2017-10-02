@@ -32,7 +32,11 @@ extern "C" {
 #include <WinSock2.h>
 typedef signed long ssize_t;
 #else
+#ifdef __linux__
 #include <unistd.h>
+#else
+#include <stddef.h>
+#endif
 #endif
 
 /**
@@ -306,7 +310,7 @@ void cn_cbor_free(cn_cbor* cb CBOR_CONTEXT);
  * @param[in]  cb         [description]
  * @return                -1 on fail, or number of bytes written
  */
-ssize_t cn_cbor_encoder_write(uint8_t *buf,
+size_t cn_cbor_encoder_write(uint8_t *buf,
 			      size_t buf_offset,
 			      size_t buf_size,
 			      const cn_cbor *cb);
@@ -455,7 +459,7 @@ bool cn_cbor_array_append(cn_cbor* cb_array,
  * @return				size of output generated, -1 if buffer is too small
  */
 
-extern ssize_t cn_cbor_printer_write(char * buffer, size_t bufferSize, const cn_cbor * cb, const char * indent, const char * crlf);
+extern int cn_cbor_printer_write(char * buffer, size_t bufferSize, const cn_cbor * cb, const char * indent, const char * crlf);
 
 #ifdef  __cplusplus
 }

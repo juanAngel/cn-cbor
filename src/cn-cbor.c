@@ -16,7 +16,12 @@ extern "C" {
 #ifdef _MSC_VER
 #include <WinSock2.h>  // needed for ntohl on Windows
 #else
+
+#ifdef __linux__
 #include <arpa/inet.h> // needed for ntohl (e.g.) on Linux
+#else
+#include <sys/endian.h>
+#endif
 
 #include "dll-export.h"
 #endif // _MSC_VER

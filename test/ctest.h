@@ -159,7 +159,11 @@ void assert_fail(const char* caller, int line);
 #endif
 #include <inttypes.h>
 #ifndef _MSC_VER
+#ifdef __linux__
 #include <unistd.h>
+#else
+#include <stddef.h>
+#endif
 #endif
 #include <stdint.h>
 #include <stdlib.h>

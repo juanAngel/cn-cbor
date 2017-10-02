@@ -12,7 +12,11 @@ extern "C" {
 #include <WinSock2.h>
 #define inline _inline
 #else
-#include <arpa/inet.h>
+#ifdef __linux__
+#include <arpa/inet.h> // needed for ntohl (e.g.) on Linux
+#else
+#include <sys/endian.h>
+#endif
 #endif
 #include <string.h>
 #ifndef _MSC_VER
@@ -314,7 +318,7 @@ void _encoder_breaker(const cn_cbor *cb, int depth, void *context)
 #endif
 }
 
-ssize_t cn_cbor_encoder_write(uint8_t *buf,
+size_t cn_cbor_encoder_write(uint8_t *buf,
 			      size_t buf_offset,
 			      size_t buf_size,
 			      const cn_cbor *cb)

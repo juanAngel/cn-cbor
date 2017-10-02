@@ -30,7 +30,7 @@ extern "C" {
 typedef struct _write_state
 {
 	char * rgbOutput;
-	ssize_t ib;
+    int ib;
 	size_t cbLeft;
 	uint8_t * rgFlags;
 	const char * szIndentWith;
@@ -229,7 +229,7 @@ void _print_breaker(const cn_cbor * cb, int depth, void * context)
 	}
 }
 
-ssize_t cn_cbor_printer_write(char * rgbBuffer, size_t cbBuffer, const cn_cbor * cb, const char * szIndentWith, const char * szEndOfLine)
+int cn_cbor_printer_write(char * rgbBuffer, size_t cbBuffer, const cn_cbor * cb, const char * szIndentWith, const char * szEndOfLine)
 {
 	uint8_t flags[128] = { 0 };
 	char rgchZero[1] = { 0 };
