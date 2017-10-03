@@ -1,14 +1,10 @@
 #
 #
 # compiling/installing sources for cn-cbor
-
-set ( cbor_srcs
-      cn-cbor.c
-      cn-create.c
-      cn-encoder.c
-      cn-error.c
-      cn-get.c
-      cn-print.c
+file (GLOB_RECURSE cbor_srcs
+    "*.c"
+    "*.h"
+    "../include/*.h"
 )
 
 if (use_context)
