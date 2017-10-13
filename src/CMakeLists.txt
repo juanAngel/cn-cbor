@@ -7,10 +7,10 @@ file (GLOB_RECURSE cbor_srcs
     "../include/*.h"
 )
 
-if (use_context)
-  add_definitions(-DUSE_CBOR_CONTEXT)
-endif()
 add_library ( cn-cbor ${LIB_TYPE} ${cbor_srcs} )
+if (use_context)
+  target_compile_definitions(cn-cbor PUBLIC -DUSE_CBOR_CONTEXT)
+endif()
 message ( "MSVC: ${MSVC}")
 if ( MSVC )
    message ( "test: ${build_shared_libs}")
