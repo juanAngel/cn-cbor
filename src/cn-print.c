@@ -29,12 +29,12 @@ extern "C" {
 
 typedef struct _write_state
 {
-	char * rgbOutput;
+    char * rgbOutput;
     int ib;
 	size_t cbLeft;
 	uint8_t * rgFlags;
-	const char * szIndentWith;
-	const char * szEndOfLine;
+    const char * szIndentWith;
+    const char * szEndOfLine;
 } cn_write_state;
 
 typedef void(*cn_visit_func)(const cn_cbor *cb, int depth, void *context);
@@ -67,8 +67,8 @@ void write_data(cn_write_state * ws, const char * sz, size_t cb)
 void _doIndent(cn_write_state * ws, int depth)
 {
 	int i;
-	char * sz = ws->rgbOutput + ws->ib;
-	size_t cbIndentWith = strlen(ws->szIndentWith);
+    char * sz = ws->rgbOutput + ws->ib;
+    size_t cbIndentWith = strlen(ws->szIndentWith);
 	int cbIndent = depth * cbIndentWith;
 
 
@@ -98,7 +98,7 @@ void _print_encoder(const cn_cbor * cb, int depth, void * context)
 	uint8_t flags = ws->rgFlags[depth];
 
 	if (flags & 1) {
-		write_data(ws, ", ", 2);
+        write_data(ws, ", ", 2);
 		ws->rgFlags[depth] &= 0xfe;
 
 		if (ws->szIndentWith) {
@@ -176,7 +176,7 @@ void _print_encoder(const cn_cbor * cb, int depth, void * context)
 
 	case CN_CBOR_TEXT:
 		write_data(ws, "\"", 1);
-		write_data(ws, cb->v.str, cb->length);
+        //write_data(ws, cb->v.str, cb->length);
 		write_data(ws, "\"", 1);
 		break;
 

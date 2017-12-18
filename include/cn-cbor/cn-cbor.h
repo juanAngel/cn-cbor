@@ -105,7 +105,7 @@ typedef struct cn_cbor {
     /** CN_CBOR_BYTES */
     const uint8_t* bytes;
     /** CN_CBOR_TEXT */
-    const char* str;
+    const uint8_t* str;
     /** CN_CBOR_INT */
 #ifdef _MSC_VER
 	int64_t sint;

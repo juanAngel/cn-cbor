@@ -169,7 +169,7 @@ again:
     cb->v.sint = ~val;          /* to do: Overflow check */
     break;
   case MT_BYTES: case MT_TEXT:
-    cb->v.str = (char *) pos;
+    cb->v.str = (uint8_t *) pos;
     cb->length = (size_t) val;
     TAKE(pos, ebuf, val, ;);
     break;
@@ -251,13 +251,13 @@ fail:
 }
 
 MYLIB_EXPORT
-cn_cbor* cn_cbor_decode(const unsigned char* buf, size_t len CBOR_CONTEXT, cn_cbor_errback *errp) {
+cn_cbor* cn_cbor_decode(const uint8_t* buf, size_t len CBOR_CONTEXT, cn_cbor_errback *errp) {
   cn_cbor catcher = {CN_CBOR_INVALID, 0, {0}, 0, NULL, NULL, NULL, NULL};
   struct parse_buf pb;
   cn_cbor* ret;
 
-  pb.buf  = (unsigned char *)buf;
-  pb.ebuf = (unsigned char *)buf+len;
+  pb.buf  = (uint8_t *)buf;
+  pb.ebuf = (uint8_t *)buf+len;
   pb.err  = CN_CBOR_NO_ERROR;
   ret = decode_item(&pb CBOR_CONTEXT_PARAM, &catcher);
   if (ret != NULL) {
@@ -271,7 +271,7 @@ cn_cbor* cn_cbor_decode(const unsigned char* buf, size_t len CBOR_CONTEXT, cn_cb
 //fail:
     if (errp) {
       errp->err = pb.err;
-      errp->pos = pb.buf - (unsigned char *)buf;
+      errp->pos = pb.buf - (uint8_t *)buf;
     }
     return NULL;
   }

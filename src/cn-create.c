@@ -39,7 +39,7 @@ cn_cbor* cn_cbor_data_create(const uint8_t* data, int len
 
   ret->type = CN_CBOR_BYTES;
   ret->length = len;
-  ret->v.str = (const char*) data; // TODO: add v.ustr to the union?
+  ret->v.str = (const uint8_t*) data; // TODO: add v.ustr to the union?
 
   return ret;
 }
@@ -54,7 +54,7 @@ cn_cbor* cn_cbor_string_create(const char* data
 
   ret->type = CN_CBOR_TEXT;
   ret->length = strlen(data);
-  ret->v.str = data;
+  ret->v.str = (uint8_t*)data;
 
   return ret;
 }
